@@ -5,8 +5,7 @@ import {auth, signIn, signOut} from "@/auth";
 import {CirclePlus, LogOut} from "lucide-react";
 
 const NavBar = async () => {
-    const session = await auth()
-    console.log(session);
+    const session = await auth();
     return (
         <header className="px-5 py-3 bg-white shadow-sm font-work-sans">
             <nav className="flex items-center justify-between">
@@ -17,7 +16,7 @@ const NavBar = async () => {
                     {session && session?.user ? (
                             <>
                                 <Link href="/startup/create">
-                                    <div className="flex items-center justify-center gap-1 p-2 rounded-full hover:bg-primary-100 hover:text-primary-600">
+                                    <div className="flex items-center justify-center gap-1 p-2 rounded-full font-semibold hover:bg-primary-100 hover:text-primary-600">
                                         <CirclePlus/>
                                         Create
                                     </div>
@@ -27,13 +26,13 @@ const NavBar = async () => {
                                     await signOut()
                                 }}>
                                     <button type="submit" style={{cursor: 'pointer'}}
-                                            className="flex items-center justify-center gap-1 p-2 rounded-full hover:bg-alizarin-crimson-50 hover:text-alizarin-crimson-900">
+                                            className="flex items-center justify-center gap-1 p-2 rounded-full font-semibold text-alizarin-crimson hover:bg-alizarin-crimson-50 hover:text-alizarin-crimson-900">
                                         <LogOut/>
                                         Logout
                                     </button>
                                 </form>
                                 <Link href={`/user/${session?.id}`}>
-                                    <div className="flex items-center justify-center gap-3 p-2">
+                                    <div className="flex items-center justify-center gap-3 p-2 font-semibold hover:text-primary-600">
                                         {session?.user?.name}
                                         <Image src={`${session?.user?.image}`} alt="placeholder" width={30} height={30} className="rounded-full"/>
 

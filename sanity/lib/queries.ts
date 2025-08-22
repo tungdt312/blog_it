@@ -49,7 +49,7 @@ export const AUTHOR_BY_GITHUB =
     )
 
 export const STARTUPS_QUERY_BY_AUTHOR =
-    defineQuery(`*[_type == "startup" ] | order(_createdAt desc) {
+    defineQuery(`*[_type == "startup" && author._ref == $id ] | order(_createdAt desc) {
   _id,
     title,
     slug,
@@ -62,3 +62,10 @@ export const STARTUPS_QUERY_BY_AUTHOR =
     category,
     image
 }`);
+
+export const USER_BY_ID =
+    defineQuery(
+        `*[_type == "author" && _id == $id][0]{
+        _id, name, image, bio, username}`
+    )
+
