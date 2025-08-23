@@ -7,8 +7,10 @@ import {STARTUPS_QUERY_BY_AUTHOR, USER_BY_ID} from "@/sanity/lib/queries";
 
 const Page = async ({params} : {params: {id: string}}) => {
     const {id} = params;
-    const user = await client.fetch(USER_BY_ID, {id});
-    const posts = await client.fetch(STARTUPS_QUERY_BY_AUTHOR, {id})
+    const [user, posts] = await Promise.all([
+        client.fetch(USER_BY_ID, {id}),
+        client.fetch(STARTUPS_QUERY_BY_AUTHOR, {id})
+    ])
     return (
         <section className="profile_container">
             <ProfileCard user={user as User} />
