@@ -6,13 +6,15 @@ import {after} from "next/server";
 
 const View = async ({id}: { id: string }) => {
 
-    after(async () =>
+    try {
         await writeClient
             .patch(id)
             .setIfMissing({views: 0})
             .inc({views: 1})
             .commit()
-    )
+    } catch (err) {
+        console.log({error: {err}})
+    }
 
     const {views} = await client
         .withConfig({useCdn: false})
